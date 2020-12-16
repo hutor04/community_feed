@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
+import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import Card from '../components/Card/Card';
 
@@ -39,12 +40,24 @@ const Question = () => {
   }, [id]);
 
   if (loading || error) {
-    return <Alert>{loading ? 'Loading...' : error}</Alert>;
+    return (
+      <>
+        <Helmet>
+        <title>{`Q&A Feed - Question #${id}`}</title>
+        </Helmet>
+        <Alert>{loading ? 'Loading...' : error}</Alert>
+      </>
+    );
   }
   return (
-    <QuestionWrapper>
-      <Card key={data.items[0].qustion_id} data={data.items[0]} />
-    </QuestionWrapper>
+    <>
+      <Helmet>
+        <title>{`Q&A Feed - Question #${id}`}</title>
+      </Helmet>
+      <QuestionWrapper>
+        <Card key={data.items[0].qustion_id} data={data.items[0]} />
+      </QuestionWrapper>
+    </>
   );
 
 };

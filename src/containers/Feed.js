@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import queryString from 'query-string';
+import Helmet from 'react-helmet';
 import styled from 'styled-components';
 import Card from '../components/Card/Card';
 
@@ -68,7 +69,14 @@ const Feed = () => {
   }, [page]);
 
   if (loading || error) {
-    return <Alert>{loading ? 'Loading...' : 'Error...'}</Alert>;
+    return (
+      <>
+        <Helmet>
+        <title>Q&A Feed - Questions</title>
+        </Helmet>
+        <Alert>{loading ? 'Loading...' : error}</Alert>
+      </>
+    );
   }
 
   return (
