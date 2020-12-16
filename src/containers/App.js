@@ -1,7 +1,9 @@
-import React, { Component } from 'react';
+import React from 'react';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 import styled, { createGlobalStyle } from 'styled-components';
 import Header from '../components/Header/Header';
 import Feed from './Feed';
+import Question from './Question';
 
 const GlobalStyle = createGlobalStyle`
   body {
@@ -25,7 +27,13 @@ const App = () => {
       <GlobalStyle />
       <AppWrapper>
         <Header />
-        <Feed />
+        <Router>
+          <Switch>
+            <Route path='/' exact component={Feed} />
+            <Route path='/questions/:id' component={Question} />
+            <Route path='/questions' component={Feed} />
+          </Switch>
+        </Router>
       </AppWrapper>
     </>
   );
