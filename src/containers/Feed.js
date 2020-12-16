@@ -20,6 +20,20 @@ const CardLink = styled(Link)`
   color: inherit;
 `;
 
+const PaginationBar = styled.div`
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+`;
+
+const PaginationLink = styled(Link)`
+  padding: 1%;
+  background: lightBlue;
+  color: white;
+  text-decoration: none
+  border-radius: 5px;
+ `;
+
 const ROOT_API = 'https://api.stackexchange.com/2.2/';
 
 const Feed = () => {
@@ -64,6 +78,10 @@ const Feed = () => {
           <Card key={item.question_id} data={item} />
         </CardLink>
       ))}
+      <PaginationBar>
+        {page > 1 && <PaginationLink to={`${location.pathname}?page=${page - 1}`}>Previous</PaginationLink>}
+        {data.has_more && <PaginationLink to={`${location.pathname}?page=${page + 1}`}>Next</PaginationLink>}
+      </PaginationBar>
     </FeedWrapper>
   );
 
